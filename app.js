@@ -3,7 +3,7 @@
   const $ = id => document.getElementById(id);
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const PLACE = Object.fromEntries(window.PLACES.map(p => [p.id, p]));
-  const photo = sid => 'photos/' + sid + '.webp';
+  const photo = sid => sid + '.webp';
   const img = (sid, alt) => `<img class="ph" src="${photo(sid)}" alt="${esc(alt)}" loading="lazy">`;
   const mapUrl = p => p ? `https://yandex.ru/maps/?ll=${p.lon},${p.lat}&pt=${p.lon},${p.lat}&z=${Math.min(p.z || 16, 16)}&l=map` : '#';
   const srcChips = (codes, color) => (codes || []).filter(c => SRC[c]).map(c =>
@@ -99,7 +99,7 @@
       </div>
     </button>`).join('');
   $('fair-timeline').innerHTML = FAIR_TIMELINE.map(e => `<div style="display:grid;grid-template-columns:minmax(96px,128px) minmax(0,1fr);gap:20px;align-items:center;padding:14px 0;min-height:56px;border-bottom:1px solid rgba(200,163,90,.2);box-sizing:content-box"><span style="font-family:'Ruslan Display',serif;font-size:clamp(26px,2.2vw,34px);line-height:1.1;color:#d9a536">${esc(e.y)}</span><span style="font-size:clamp(22px,1.8vw,28px);font-weight:700;line-height:1.3;color:#f4ead2;text-wrap:pretty">${esc(e.t)}</span></div>`).join('');
-  $('goods').innerHTML = GOODS.map(g => `<div style="display:grid;grid-template-columns:56px minmax(0,1.5fr) minmax(0,1fr);gap:20px;align-items:center;padding:14px 0;border-bottom:1px solid rgba(200,163,90,.2)"><img src="icons/${g.i}.webp" alt="" style="width:56px;height:56px;object-fit:contain;display:block"><span style="font-size:clamp(22px,1.8vw,28px);font-weight:700;line-height:1.3;color:#f4ead2;text-transform:capitalize">${esc(g.v)}</span><span style="font-size:clamp(22px,1.8vw,28px);font-weight:700;line-height:1.3;color:#f4ead2">${esc(g.k)}</span></div>`).join('');
+  $('goods').innerHTML = GOODS.map(g => `<div style="display:grid;grid-template-columns:56px minmax(0,1.5fr) minmax(0,1fr);gap:20px;align-items:center;padding:14px 0;border-bottom:1px solid rgba(200,163,90,.2)"><img src="${g.i}.webp" alt="" style="width:56px;height:56px;object-fit:contain;display:block"><span style="font-size:clamp(22px,1.8vw,28px);font-weight:700;line-height:1.3;color:#f4ead2;text-transform:capitalize">${esc(g.v)}</span><span style="font-size:clamp(22px,1.8vw,28px);font-weight:700;line-height:1.3;color:#f4ead2">${esc(g.k)}</span></div>`).join('');
 
   /* ---------- 04 Индустриальный рывок ---------- */
   $('war-stats').innerHTML = WAR_STATS.map(s => `<div style="padding:22px 20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:44px;font-weight:700;line-height:1;color:${s.c}">${esc(s.v)}</span><span style="font:400 12px/1.45 'IBM Plex Mono',monospace;color:#bdbab3">${esc(s.l)}</span></div>`).join('');
